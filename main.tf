@@ -1,3 +1,9 @@
+module "this_label" {
+  source     = "git::github.com/xoap-io/terraform-aws-misc-label?ref=v0.1.0"
+  context    = var.context
+  attributes = [var.name]
+}
+
 resource "kubernetes_manifest" "argo_application" {
 
   computed_fields = [
@@ -14,7 +20,7 @@ resource "kubernetes_manifest" "argo_application" {
     apiVersion = "argoproj.io/v1alpha1"
     kind       = "Application"
     metadata = {
-      name       = var.name
+      name       = module.this_label.id
       namespace  = var.argocd_namespace
       labels     = local.labels
       finalizers = var.cascade_delete == true ? ["resources-finalizer.argocd.argoproj.io"] : []
@@ -27,7 +33,7 @@ resource "kubernetes_manifest" "argo_application" {
         chart          = var.chart
         path           = var.path
         helm = {
-          releaseName = var.release_name == null ? var.name : var.release_name
+          releaseName = var.release_name == null ? module.this_label.id : var.release_name
           parameters  = local.helm_parameters
           values      = yamlencode(merge({ labels = local.labels }, var.helm_values))
         }
