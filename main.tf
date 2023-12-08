@@ -10,7 +10,9 @@ resource "kubernetes_manifest" "argo_application" {
     "metadata.labels",
     "metadata.annotations",
     "metadata.finalizers",
-    "spec.source.helm.version"
+    "spec.source.helm.version",
+    "spec.source.helm.parameters"
+
   ]
   field_manager {
     # force field manager conflicts to be overridden
@@ -24,6 +26,7 @@ resource "kubernetes_manifest" "argo_application" {
       namespace  = var.argocd_namespace
       labels     = local.labels
       finalizers = var.cascade_delete == true ? ["resources-finalizer.argocd.argoproj.io"] : []
+      annotations = var.annotations
     }
     spec = {
       project = var.project
@@ -64,4 +67,6 @@ resource "kubernetes_manifest" "argo_application" {
       ignoreDifferences = var.ignore_differences
     }
   }
+
+
 }

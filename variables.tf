@@ -2,6 +2,10 @@ variable "argocd_namespace" {
   type        = string
   description = "The name of the target ArgoCD Namespace"
 }
+variable "annotations" {
+  type        = map(string)
+  description = "Additional annotations to add to the kubernetes manifest"
+}
 variable "repo_url" {
   type        = string
   description = "Source of the Helm application manifests"
