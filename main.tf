@@ -22,10 +22,10 @@ resource "kubernetes_manifest" "argo_application" {
     apiVersion = "argoproj.io/v1alpha1"
     kind       = "Application"
     metadata = {
-      name       = module.this_label.id
-      namespace  = var.argocd_namespace
-      labels     = local.labels
-      finalizers = var.cascade_delete == true ? ["resources-finalizer.argocd.argoproj.io"] : []
+      name        = module.this_label.id
+      namespace   = var.argocd_namespace
+      labels      = local.labels
+      finalizers  = var.cascade_delete == true ? ["resources-finalizer.argocd.argoproj.io"] : []
       annotations = var.annotations
     }
     spec = {

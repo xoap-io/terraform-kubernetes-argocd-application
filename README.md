@@ -128,6 +128,7 @@ Please be aware that this is mainly a copy operation which means all your curren
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_annotations"></a> [annotations](#input\_annotations) | Additional annotations to add to the kubernetes manifest | `map(string)` | n/a | yes |
 | <a name="input_argocd_namespace"></a> [argocd\_namespace](#input\_argocd\_namespace) | The name of the target ArgoCD Namespace | `string` | n/a | yes |
 | <a name="input_automated_prune"></a> [automated\_prune](#input\_automated\_prune) | Specifies if resources should be pruned during auto-syncing | `bool` | `false` | no |
 | <a name="input_automated_self_heal"></a> [automated\_self\_heal](#input\_automated\_self\_heal) | Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected | `bool` | `false` | no |
@@ -156,7 +157,9 @@ Please be aware that this is mainly a copy operation which means all your curren
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_app"></a> [app](#output\_app) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-end -->
